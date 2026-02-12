@@ -336,12 +336,8 @@
                             <label for="undergrad">Undergraduate</label>
                         </div>
                         <div class="radio-item">
-                            <input type="radio" id="masters" name="level" value="masters" onclick="filterColleges()">
-                            <label for="masters">Master's</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="doctorate" name="level" value="doctorate" onclick="filterColleges()">
-                            <label for="doctorate">Doctorate</label>
+                            <input type="radio" id="grad" name="level" value="grad" onclick="filterColleges()">
+                            <label for="grad">Graduate</label>
                         </div>
                     </div>
                 </div>
@@ -392,8 +388,8 @@
                         <option value="business">College of Business Education</option>
                         <option value="arts">College of Arts</option>
                         
-                        <option value="grad_masters">Master's</option>
-                        <option value="grad_doctorate">Doctoral</option>
+                        <option value="grad_masters">Graduate School (Master's)</option>
+                        <option value="grad_doctorate">Graduate School (Doctoral)</option>
                     </select>
                 </div>
                 <div>
@@ -472,7 +468,7 @@
         collegeSelect.value = "";
         document.getElementById('program').innerHTML = '<option value="" disabled selected>Select College First</option>';
 
-        // Logic: Show/Hide based on strict academic level
+        // Logic: Show/Hide based on academic level
         for (let i = 0; i < options.length; i++) {
             const opt = options[i];
             
@@ -486,16 +482,9 @@
                 } else {
                     opt.style.display = 'block';
                 }
-            } else if (level === 'masters') {
-                // Show ONLY Master's Grad School
-                if (opt.value === 'grad_masters') {
-                    opt.style.display = 'block';
-                } else {
-                    opt.style.display = 'none';
-                }
-            } else if (level === 'doctorate') {
-                // Show ONLY Doctorate Grad School
-                if (opt.value === 'grad_doctorate') {
+            } else if (level === 'grad') {
+                // Hide standard colleges, Show BOTH graduate school options
+                if (opt.value === 'grad_masters' || opt.value === 'grad_doctorate') {
                     opt.style.display = 'block';
                 } else {
                     opt.style.display = 'none';
