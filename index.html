@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADEi University | Digital Registrar</title>
+    <style>
+        /* CSS STYLES EMBEDDED DIRECTLY TO ENSURE LOADING */
+        :root {
+            --primary-color: #c4ad2b; 
+            --accent-color: #b1a60d;  
+            --bg-color: #ffe449;
+            --border-color: #ddd;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        h1 { margin: 0; color: var(--primary-color); }
+        h2 { font-size: 1.2rem; color: #666; font-weight: normal; margin-top: 5px; }
+
+        /* Hierarchy Headers */
+        h3 { 
+            margin-top: 15px; 
+            color: var(--primary-color); 
+            font-size: 1.1rem; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 5px;
+        }
+
+        /* FORM STRUCTURE */
+        fieldset {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        legend {
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 0 10px;
+            font-size: 1.1em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        /* INPUT STYLING */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            transition: all 0.2s ease;
+        }
+
+        /* Visual Feedback: Focus State */
+        input:focus, select:focus {
+            outline: 2px solid var(--accent-color);
+            border-color: var(--accent-color);
+            background-color: #f0f8ff; /* Light blue tint */
+        }
+
+        /* GRID SYSTEM */
+        .grid-row {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Column Variations */
+        .col-4 { grid-template-columns: 1fr 1fr 1fr 0.5fr; } 
+        .col-3 { grid-template-columns: 1fr 1fr 1fr; }
+        .col-2 { grid-template-columns: 1fr 1fr; }
+
+        /* Radio Group Styling */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .radio-item input { width: auto; cursor: pointer; }
+        .radio-item label { margin: 0; font-weight: normal; cursor: pointer; }
+
+        /* BUTTON */
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: rgb(235, 235, 235);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background-color: #002244;
+        }
+
+        /* RESPONSIVENESS (Mobile View) */
+        @media (max-width: 768px) {
+            .col-4, .col-3, .col-2 {
+                grid-template-columns: 1fr; /* Stack all grids */
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>ADEi University</h1>
+        <h2>Digital Registrar Registration Form</h2>
+    </header>
+
+    <form action="/submit-registration" method="POST">
+        
+        <fieldset>
+            <legend>Personal Information</legend>
+            
+            <div class="grid-row col-4">
+                <div>
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" required>
+                </div>
+                <div>
+                    <label for="mname">Middle Name</label>
+                    <input type="text" id="mname" name="middlename">
+                </div>
+                <div>
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" required>
+                </div>
+                <div>
+                    <label for="suffix">Suffix</label>
+                    <input type="text" id="suffix" name="suffix" placeholder="e.g. Jr.">
+                </div>
+            </div>
+
+            <div class="grid-row col-2">
+                <div>
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" onkeydown="return false" required>
+                </div>
+                <div>
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="non-binary">Non-binary</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-row col-2">
+                <div>
+                    <label for="nationality">Nationality</label>
+                    <select id="nationality" name="nationality">
+                        <option value="filipino">Filipino</option>
+                        <option value="american">American</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="religion">Religion</label>
+                    <input type="text" id="religion" name="religion">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact Details</legend>
+            
+            <div class="grid-row col-3">
+                <div>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="student@email.com" required>
+                </div>
+                <div>
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="0917-XXX-XXXX" required>
+                </div>
+                <div>
+                    <label for="landline">Landline</label>
+                    <input type="tel" id="landline" name="landline">
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <label>Complete Home Address</label>
+            </div>
+            
+            <div class="grid-row col-2">
+                 <div>
+                    <label for="street">Street / Unit</label>
+                    <input type="text" id="street" name="street" required>
+                 </div>
+                 <div>
+                    <label for="barangay">Barangay</label>
+                    <input type="text" id="barangay" name="barangay" required>
+                 </div>
+            </div>
+
+            <div class="grid-row col-3">
+                <div>
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div>
+                    <label for="province">Province</label>
+                    <input type="text" id="province" name="province" required>
+                </div>
+                <div>
+                    <label for="zip">Zip Code</label>
+                    <input type="number" id="zip" name="zip" required>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Academic History</legend>
+
+            <h3>Grade School</h3>
+            <div class="grid-row col-2">
+                <div>
+                    <label for="gs_name">School Name</label>
+                    <input type="text" id="gs_name" name="gs_name" required>
+                </div>
+                <div>
+                    <label for="gs_year">Year Graduated</label>
+                    <input type="number" id="gs_year" name="gs_year" min="1900" max="2026">
+                </div>
+            </div>
+            <div class="grid-row">
+                <div>
+                    <label for="gs_address">School Address</label>
+                    <input type="text" id="gs_address" name="gs_address">
+                </div>
+            </div>
+
+            <h3>Junior High School</h3>
+            <div class="grid-row col-2">
+                <div>
+                    <label for="jhs_name">School Name</label>
+                    <input type="text" id="jhs_name" name="jhs_name" required>
+                </div>
+                <div>
+                    <label for="jhs_year">Year Graduated</label>
+                    <input type="number" id="jhs_year" name="jhs_year" min="1900" max="2026">
+                </div>
+            </div>
+            <div class="grid-row">
+                <div>
+                    <label for="jhs_address">School Address</label>
+                    <input type="text" id="jhs_address" name="jhs_address">
+                </div>
+            </div>
+
+            <h3>Senior High School</h3>
+            <div class="grid-row col-3">
+                <div>
+                    <label for="shs_name">School Name</label>
+                    <input type="text" id="shs_name" name="shs_name" required>
+                </div>
+                <div>
+                    <label for="shs_year">Year Graduated</label>
+                    <input type="number" id="shs_year" name="shs_year" min="1900" max="2026">
+                </div>
+                <div>
+                    <label for="shs_gwa">Grade Average</label>
+                    <input type="number" id="shs_gwa" name="shs_gwa" step="0.01" placeholder="e.g., 95.5">
+                </div>
+            </div>
+            <div class="grid-row">
+                <div>
+                    <label for="shs_address">School Address</label>
+                    <input type="text" id="shs_address" name="shs_address">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Enrollment Choices</legend>
+
+            <div class="grid-row col-2">
+                <div>
+                    <label>Academic Level</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="undergrad" name="level" value="undergrad" checked>
+                            <label for="undergrad">Undergraduate</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="grad" name="level" value="grad">
+                            <label for="grad">Graduate</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Semester</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="1st_sem" name="semester" value="1st">
+                            <label for="1st_sem">1st Sem</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="2nd_sem" name="semester" value="2nd">
+                            <label for="2nd_sem">2nd Sem</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="summer" name="semester" value="summer">
+                            <label for="summer">Summer</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div>
+                    <label>Campus</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="mnl" name="campus" value="Manila">
+                            <label for="mnl">Manila</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="qc" name="campus" value="Quezon City">
+                            <label for="qc">Quezon City</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row col-2">
+                <div>
+                    <label for="college">College Department</label>
+                    <select id="college" name="college">
+                        <option value="" disabled selected>Select College</option>
+                        <option value="eng">College of Engineering & Architecture</option>
+                        <option value="cs">College of Computer Studies</option>
+                        <option value="business">College of Business Education</option>
+                        <option value="arts">College of Arts</option>
+                        <option value="grad_school">Graduate School</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="program">Degree Program</label>
+                    <select id="program" name="program">
+                        <option value="" disabled selected>Select Program</option>
+                        
+                        <optgroup label="Engineering & Architecture">
+                            <option value="bs_arch">BS Architecture</option>
+                            <option value="bs_che">BS Chemical Engineering</option>
+                            <option value="bs_ce">BS Civil Engineering</option>
+                            <option value="bs_cpe">BS Computer Engineering</option>
+                            <option value="bs_ee">BS Electrical Engineering</option>
+                            <option value="bs_ece">BS Electronics Engineering</option>
+                            <option value="bs_ie">BS Industrial Engineering</option>
+                            <option value="bs_me">BS Mechanical Engineering</option>
+                        </optgroup>
+
+                        <optgroup label="Computer Studies">
+                            <option value="bs_cs">BS Computer Science</option>
+                            <option value="bs_ds">BS Data Science and Analytics</option>
+                            <option value="bs_emc">BS Entertainment and Multimedia Computing</option>
+                            <option value="bs_it">BS Information Technology</option>
+                        </optgroup>
+
+                        <optgroup label="Business Education">
+                            <option value="bs_acc">BS Accountancy</option>
+                            <option value="bs_ais">BS Accounting Information System</option>
+                            <option value="bs_ba_fm">BS Business Ad - Financial Management</option>
+                            <option value="bs_ba_hr">BS Business Ad - Human Resource</option>
+                            <option value="bs_ba_log">BS Business Ad - Logistics</option>
+                            <option value="bs_ba_mkt">BS Business Ad - Marketing</option>
+                        </optgroup>
+
+                        <optgroup label="College of Arts">
+                            <option value="ba_eng">BA English Language</option>
+                            <option value="ba_pol">BA Political Science</option>
+                        </optgroup>
+
+                         <optgroup label="Doctorate Degrees">
+                            <option value="doc_it">Doctor in IT</option>
+                            <option value="doc_eng">Doctor of Engineering (Comp Eng)</option>
+                            <option value="phd_cs">PhD in Computer Science</option>
+                        </optgroup>
+
+                        <optgroup label="Master's Degrees">
+                            <option value="mis">Master in Information Systems</option>
+                            <option value="mit">Master in IT</option>
+                            <option value="mlscm">Master in Logistics</option>
+                            <option value="meng_ce">Master of Eng (Civil)</option>
+                            <option value="meng_cpe">Master of Eng (Computer)</option>
+                            <option value="meng_ee">Master of Eng (Electrical)</option>
+                            <option value="meng_ece">Master of Eng (Electronics)</option>
+                            <option value="meng_ie">Master of Eng (Industrial)</option>
+                            <option value="meng_me">Master of Eng (Mechanical)</option>
+                            <option value="mscs">MS Computer Science</option>
+                        </optgroup>
+
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn-submit">Submit Registration</button>
+    </form>
+</div>
+
+</body>
+</html>
